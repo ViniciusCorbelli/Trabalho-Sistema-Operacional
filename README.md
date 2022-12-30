@@ -1,3 +1,3 @@
-#  dcc062
+#  Trabalho de Sistema Operacional - DCC062
 
-Add instructions for project developers here.
+Projeto desenvolvido a disciplina de sistema operacional (DCC062)
