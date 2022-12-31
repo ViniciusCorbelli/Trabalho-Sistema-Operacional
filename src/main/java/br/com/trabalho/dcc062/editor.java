@@ -8,8 +8,8 @@ import java.util.List;
 public class Editor {
 
 	private List<String[]> editor = new ArrayList<String[]>();
-	private static int QTD_LINHAS = 0;
-	private static final int MAX_COLUNAS = 30;
+	private int QTD_LINHAS = 0;
+	public final int MAX_COLUNAS = 20;
 	
 	public Editor() {
 	}
@@ -26,10 +26,10 @@ public class Editor {
 		return editor.get(linha - 1)[coluna - 1];
 	}
 	
-	public void setTexto(int linha, int coluna, String texto) {
+	public void setTexto(int linha, int coluna, String palavra) {
 		verificaLinhas(linha);
 		
-		editor.get(linha - 1)[coluna - 1] = texto;
+		editor.get(linha - 1)[coluna - 1] = palavra;
 	}
 	
 	private void verificaLinhas(int linha) {

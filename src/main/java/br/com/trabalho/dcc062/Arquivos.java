@@ -5,15 +5,8 @@ import java.util.List;
 
 public class Arquivos {
 
-	private static Arquivos singleton;
 	private List<Editor> arquivos = new ArrayList<Editor>();
 	private Editor editor;
-
-	public static synchronized Arquivos getInstance() {
-		if (singleton == null)
-			singleton = new Arquivos();
-		return singleton;
-	}
 
 	public Arquivos() {
 		arquivos.add(new Editor());

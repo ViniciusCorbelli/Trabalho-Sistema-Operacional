@@ -9,29 +9,28 @@ import java.util.Scanner;
 public class Principal {
 
 	private static Scanner scanner = new Scanner(System.in);
-
-	private static List<Menu> metodos = new ArrayList<Menu>();
+	private static List<Menu> menu = new ArrayList<Menu>();
 
 	public static void main(String[] args) {
-		metodos.add(new Menu("Sair", "sair"));
-		metodos.add(new Menu("Abrir arquivo", "abrirArquivo"));
-		metodos.add(new Menu("Trocar de arquivo", "trocarArquivo"));
-		metodos.add(new Menu("Editar o documento", "editarDocumento"));
-		metodos.add(new Menu("Ver o documento.", "verDocumento"));
-		metodos.add(new Menu("Salvar", "salvarDocumento"));
+		menu.add(new Menu("Sair", "sair"));
+		menu.add(new Menu("Abrir arquivo", "abrirArquivo"));
+		menu.add(new Menu("Trocar de arquivo", "trocarArquivo"));
+		menu.add(new Menu("Editar o documento", "editarDocumento"));
+		menu.add(new Menu("Ver o documento.", "verDocumento"));
+		menu.add(new Menu("Salvar", "salvarDocumento"));
 
 		boolean loop = true;
 
 		do {
 			try {
-				for (int i = 0; i < metodos.size(); i++) {
-					System.out.println(i + " - " + metodos.get(i).nome);
+				for (int i = 0; i < menu.size(); i++) {
+					System.out.println(i + " - " + menu.get(i).nome);
 				}
 				int resposta = scanner.nextInt();
 
 				Acoes obj = new Acoes();
 				Class<?> classObj = obj.getClass();
-				Method printMessage = classObj.getDeclaredMethod(metodos.get(resposta).funcao);
+				Method printMessage = classObj.getDeclaredMethod(menu.get(resposta).funcao);
 
 				try {
 					loop = (boolean) printMessage.invoke(obj);

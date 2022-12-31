@@ -6,9 +6,8 @@ import java.util.Scanner;
 
 public class Acoes {
 
-	private static Scanner scanner = new Scanner(System.in);
-
-	private static Arquivos arquivos = Arquivos.getInstance();
+	private Scanner scanner = new Scanner(System.in);
+	private static Arquivos arquivos = new Arquivos();
 	
 	public Acoes() {
 	}
@@ -31,6 +30,16 @@ public class Acoes {
 					linha++;
 					scanner.nextLine();
 				    String texto = scanner.nextLine();
+				    
+				    int coluna = 1;
+				    for (String palavra : texto.split(" ")) {
+						arquivos.getEditor().setTexto(linha, coluna, palavra);
+						coluna++;
+						if (coluna > arquivos.getEditor().MAX_COLUNAS) {
+							linha++;
+							coluna = 1;
+						}
+					}
 				    arquivos.getEditor().setTexto(linha, 1, texto);
 				}
 			} catch (FileNotFoundException e) {
@@ -62,7 +71,7 @@ public class Acoes {
 		System.out.println("Digite a coluna que deseja editar: ");
 		int coluna = scanner.nextInt();
 
-		System.out.println("Digite o texto que deseja inserir em [" + linha + ", " + coluna + "] ");
+		System.out.println("Digite o texto que deseja inserir na linha " + linha + ", coluna " + coluna + ": ");
 		try {
 			System.out.println("Texto atual: " + arquivos.getEditor().getTexto(linha, coluna));
 		} catch (Exception e) {}
@@ -70,7 +79,14 @@ public class Acoes {
 		scanner.nextLine();
 		String texto = scanner.nextLine();
 
-		arquivos.getEditor().setTexto(linha, coluna, texto);
+		for (String palavra : texto.split(" ")) {
+			arquivos.getEditor().setTexto(linha, coluna, palavra);
+			coluna++;
+			if (coluna > arquivos.getEditor().MAX_COLUNAS) {
+				linha++;
+				coluna = 1;
+			}
+		}
 		return true;
 	}
 
