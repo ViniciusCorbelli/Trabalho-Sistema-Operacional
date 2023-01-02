@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Acoes {
 
 	private Scanner scanner = new Scanner(System.in);
-	private static Arquivos arquivos = new Arquivos();
 	
 	public Acoes() {
 	}
@@ -33,34 +32,34 @@ public class Acoes {
 				    
 				    int coluna = 1;
 				    for (String palavra : texto.split(" ")) {
-						arquivos.getEditor().setTexto(linha, coluna, palavra);
+						Arquivos.getEditor().setTexto(linha, coluna, palavra);
 						coluna++;
-						if (coluna > arquivos.getEditor().MAX_COLUNAS) {
+						if (coluna > Editor.MAX_COLUNAS) {
 							linha++;
 							coluna = 1;
 						}
 					}
-				    arquivos.getEditor().setTexto(linha, 1, texto);
+				    Arquivos.getEditor().setTexto(linha, 1, texto);
 				}
 			} catch (FileNotFoundException e) {
 				throw new Exception(e.getCause());
 			}
 			
-			arquivos.add(novoeditor);
+			Arquivos.add(novoeditor);
 		} else {
-			arquivos.add(new Editor());
+			Arquivos.add(new Editor());
 		}
-		System.out.println("editor aberto em " + arquivos.size());
+		System.out.println("editor aberto em " + Arquivos.size());
 		return true;
 	}
 
 	public boolean trocarArquivo() throws Exception {
-		System.out.println("Qual editor você deseja editar? (Max: " + arquivos.size() + ")");
+		System.out.println("Qual editor você deseja editar? (Max: " + Arquivos.size() + ")");
 		int resposta = scanner.nextInt();
-		if (resposta > arquivos.size()) {
+		if (resposta > Arquivos.size()) {
 			throw new Exception("Arquivo não encontrado.");
 		}
-		arquivos.setEditor(arquivos.get(resposta));
+		Arquivos.setEditor(Arquivos.get(resposta));
 		return true;
 	}
 
@@ -73,16 +72,16 @@ public class Acoes {
 
 		System.out.println("Digite o texto que deseja inserir na linha " + linha + ", coluna " + coluna + ": ");
 		try {
-			System.out.println("Texto atual: " + arquivos.getEditor().getTexto(linha, coluna));
+			System.out.println("Texto atual: " + Arquivos.getEditor().getTexto(linha, coluna));
 		} catch (Exception e) {}
 		
 		scanner.nextLine();
 		String texto = scanner.nextLine();
 
 		for (String palavra : texto.split(" ")) {
-			arquivos.getEditor().setTexto(linha, coluna, palavra);
+			Arquivos.getEditor().setTexto(linha, coluna, palavra);
 			coluna++;
-			if (coluna > arquivos.getEditor().MAX_COLUNAS) {
+			if (coluna > Editor.MAX_COLUNAS) {
 				linha++;
 				coluna = 1;
 			}
@@ -91,17 +90,16 @@ public class Acoes {
 	}
 
 	public boolean verDocumento() {
-		arquivos.getEditor().verDocumento();
+		Arquivos.getEditor().verDocumento();
 		return true;
 	}
 
 	public boolean salvarDocumento() throws Exception {
 		System.out.println("Qual arquivo será salvo?");
-		scanner.nextLine();
 		String diretorio = scanner.nextLine();
 
 		try {
-			arquivos.getEditor().salvarDocumento(diretorio);
+			Arquivos.getEditor().salvarDocumento(diretorio);
 			System.out.println("Arquivo salvo em: " + diretorio);
 		} catch (Exception e) {
 			throw new Exception("Erro ao salvar o arquivo:" + e.getCause());

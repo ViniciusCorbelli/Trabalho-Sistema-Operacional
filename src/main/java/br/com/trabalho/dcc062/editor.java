@@ -9,7 +9,7 @@ public class Editor {
 
 	private List<String[]> editor = new ArrayList<String[]>();
 	private int QTD_LINHAS = 0;
-	public final int MAX_COLUNAS = 20;
+	public static final int MAX_COLUNAS = 20;
 	
 	public Editor() {
 	}

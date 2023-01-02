@@ -5,32 +5,32 @@ import java.util.List;
 
 public class Arquivos {
 
-	private List<Editor> arquivos = new ArrayList<Editor>();
-	private Editor editor;
+	private static List<Editor> arquivos = new ArrayList<Editor>();
+	private static Editor editor;
 
 	public Arquivos() {
 		arquivos.add(new Editor());
 		editor = arquivos.get(0);
 	}
 	
-	public Editor getEditor() {
-		return this.editor;
+	public static Editor getEditor() {
+		return editor;
 	}
 	
-	public void setEditor(Editor editor) {
-		this.editor = editor;
+	public static void setEditor(Editor editorNovo) {
+		editor = editorNovo;
 	}
 
-	public Editor get(int index) {
+	public static Editor get(int index) {
 		return arquivos.get(index - 1);
 	}
 	
-	public void add(Editor editor) {
-		arquivos.add(editor);
-		this.editor = editor;
+	public static void add(Editor editorNovo) {
+		arquivos.add(editorNovo);
+		editor = editorNovo;
 	}
 	
-	public int size() {
+	public static int size() {
 		return arquivos.size();
 	}
 

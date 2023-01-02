@@ -12,6 +12,8 @@ public class Principal {
 	private static List<Menu> menu = new ArrayList<Menu>();
 
 	public static void main(String[] args) {
+		new Arquivos();
+		
 		menu.add(new Menu("Sair", "sair"));
 		menu.add(new Menu("Abrir arquivo", "abrirArquivo"));
 		menu.add(new Menu("Trocar de arquivo", "trocarArquivo"));
@@ -35,11 +37,11 @@ public class Principal {
 				try {
 					loop = (boolean) printMessage.invoke(obj);
 				} catch (InvocationTargetException e) {
-					System.out.println("Ocorreu um erro interno: " + e);
+					System.out.println("Ocorreu um erro interno (1): " + e.getCause());
 				}
 
 			} catch (Exception e) {
-				System.out.println("Ocorreu um erro interno: " + e.getCause());
+				System.out.println("Ocorreu um erro interno (2): " + e.getCause());
 				loop = false;
 			}
 		} while (loop == true);
