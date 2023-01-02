@@ -1,75 +1,61 @@
-package br.com.trabalho.dcc062;
+package br.com.trabalho.dcc062.menu.acoes;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.Scanner;
 
-public class Acoes {
+import br.com.trabalho.dcc062.editor.Arquivos;
+import br.com.trabalho.dcc062.editor.Editor;
+import br.com.trabalho.dcc062.menu.Menu;
+import br.com.trabalho.dcc062.menu.Opcao;
+
+public class Inicio {
 
 	private Scanner scanner = new Scanner(System.in);
 	
-	public Acoes() {
+	public Inicio() {
 	}
 
 	public boolean sair() {
 		return false;
 	}
 
-	public boolean abrirArquivo() throws Exception {
-		System.out.println("Deseja abrir ou editor (S/N)");
-		String resposta = scanner.nextLine();
+	public boolean abrirArquivo() {
+		Menu menu = new Menu(new novoArquivo());
 		
-		if (resposta.equalsIgnoreCase("S")) {
-			Editor novoeditor = new Editor();
-			
-			try {
-				Scanner in = new Scanner(new FileReader(resposta));
-				int linha = 0;
-				while (in.hasNextLine()) {
-					linha++;
-					scanner.nextLine();
-				    String texto = scanner.nextLine();
-				    
-				    int coluna = 1;
-				    for (String palavra : texto.split(" ")) {
-						Arquivos.getEditor().setTexto(linha, coluna, palavra);
-						coluna++;
-						if (coluna > Editor.MAX_COLUNAS) {
-							linha++;
-							coluna = 1;
-						}
-					}
-				    Arquivos.getEditor().setTexto(linha, 1, texto);
-				}
-			} catch (FileNotFoundException e) {
-				throw new Exception(e.getCause());
-			}
-			
-			Arquivos.add(novoeditor);
-		} else {
-			Arquivos.add(new Editor());
+		menu.add(new Opcao("Voltar", "voltar"));
+		menu.add(new Opcao("Abrir arquivo", "abrirArquivo"));
+		menu.add(new Opcao("Arquivo em branco", "emBranco"));
+		
+		boolean retorno = (boolean) menu.executar();
+		
+		if (retorno == true) {
+			System.out.println("Arquivo aberto no editor: " + Arquivos.size());
 		}
-		System.out.println("editor aberto em " + Arquivos.size());
-		return true;
+		return retorno;
 	}
 
 	public boolean trocarArquivo() throws Exception {
-		System.out.println("Qual editor você deseja editar? (Max: " + Arquivos.size() + ")");
+		System.out.println("Qual editor você deseja abrir? (Disponivel: " + Arquivos.size() + ")");
 		int resposta = scanner.nextInt();
 		if (resposta > Arquivos.size()) {
-			throw new Exception("Arquivo não encontrado.");
+			throw new Exception("Editor não encontrado.");
 		}
 		Arquivos.setEditor(Arquivos.get(resposta));
 		return true;
 	}
 
-	public boolean editarDocumento() {
+	public boolean editarDocumento() throws Exception {
 		System.out.println("Digite a linha que deseja editar: ");
 		int linha = scanner.nextInt();
+		if (linha < 1) {
+			throw new Exception("Linha inválida.");
+		}
 
 		System.out.println("Digite a coluna que deseja editar: ");
 		int coluna = scanner.nextInt();
-
+		if (coluna > Editor.MAX_COLUNAS || coluna < 1) {
+			throw new Exception("Coluna inválida.");
+		}
+		
 		System.out.println("Digite o texto que deseja inserir na linha " + linha + ", coluna " + coluna + ": ");
 		try {
 			System.out.println("Texto atual: " + Arquivos.getEditor().getTexto(linha, coluna));

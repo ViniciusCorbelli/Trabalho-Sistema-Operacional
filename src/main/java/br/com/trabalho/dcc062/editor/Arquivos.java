@@ -1,4 +1,4 @@
-package br.com.trabalho.dcc062;
+package br.com.trabalho.dcc062.editor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,19 +6,19 @@ import java.util.List;
 public class Arquivos {
 
 	private static List<Editor> arquivos = new ArrayList<Editor>();
-	private static Editor editor;
+	private static Editor editorAberto;
 
 	public Arquivos() {
 		arquivos.add(new Editor());
-		editor = arquivos.get(0);
+		editorAberto = arquivos.get(0);
 	}
 	
 	public static Editor getEditor() {
-		return editor;
+		return editorAberto;
 	}
 	
 	public static void setEditor(Editor editorNovo) {
-		editor = editorNovo;
+		editorAberto = editorNovo;
 	}
 
 	public static Editor get(int index) {
@@ -27,7 +27,7 @@ public class Arquivos {
 	
 	public static void add(Editor editorNovo) {
 		arquivos.add(editorNovo);
-		editor = editorNovo;
+		editorAberto = editorNovo;
 	}
 	
 	public static int size() {

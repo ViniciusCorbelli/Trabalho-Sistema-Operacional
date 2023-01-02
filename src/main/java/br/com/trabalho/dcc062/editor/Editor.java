@@ -1,4 +1,4 @@
-package br.com.trabalho.dcc062;
+package br.com.trabalho.dcc062.editor;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
