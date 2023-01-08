@@ -36,7 +36,7 @@ public class Inicio {
 	public boolean trocarArquivo() throws Exception {
 		System.out.println("Qual editor você deseja abrir? (Disponivel: " + Arquivos.size() + ")");
 		int resposta = scanner.nextInt();
-		if (resposta > Arquivos.size()) {
+		if (resposta > Arquivos.size() || resposta < 1) {
 			throw new Exception("Editor não encontrado.");
 		}
 		Arquivos.setEditor(Arquivos.get(resposta));

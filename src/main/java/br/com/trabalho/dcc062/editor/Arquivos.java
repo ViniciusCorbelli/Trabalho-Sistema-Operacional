@@ -21,7 +21,10 @@ public class Arquivos {
 		editorAberto = editorNovo;
 	}
 
-	public static Editor get(int index) {
+	public static Editor get(int index) throws Exception {
+		if (index > arquivos.size() || index < 0) {
+			throw new Exception("Editor não encontrado");
+		}
 		return arquivos.get(index - 1);
 	}
 	

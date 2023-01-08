@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Menu {
 
 	private static Scanner scanner = new Scanner(System.in);
+
 	private List<Opcao> opcoes = new ArrayList<Opcao>();
 	private Object classe;
 	
@@ -24,14 +25,13 @@ public class Menu {
 		try {
 			imprimirOpcoes();
 			
-			boolean correto;
+			boolean correto = false;
 			int resposta;
 			do {
 				resposta = scanner.nextInt();
-				if (resposta >= opcoes.size()) {
+				if (resposta >= opcoes.size() || resposta < 0) {
 					System.out.println("Opção inválida, selecione:");
 					imprimirOpcoes();
-					correto = false;
 				} else {
 					correto = true;
 				}
